@@ -25,6 +25,7 @@ const Timer = function () {
 
     return (
         <div className='timer'>
+            Time spent:
             {[
                 hours.toString().padStart(2, '0'),
                 minutes.toString().padStart(2, '0'),
