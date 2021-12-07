@@ -1,0 +1,12 @@
+.uncompleted {
+    font-size: 15px;
+    padding: 10px;
+    margin: 5px 5px 0 0;
+    color: dimgray;
+    border: solid dimgray 1px;
+    border-radius: 5px;
+}
+.item-side-buttons {
+    display: flex;
+    justify-content: space-between;
+}

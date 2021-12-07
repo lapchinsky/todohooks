@@ -1,0 +1,18 @@
+.timer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: dimgrey;
+
+}
+.icon-pause:after {
+    content: '⏸';
+}
+
+.icon-play:after {
+    content: '▶';
+}
+button {
+    background-color: white;
+    border: 0;
+}
