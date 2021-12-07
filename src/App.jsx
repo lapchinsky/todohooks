@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import TodoList from "./Todo/TodoList/TodoList";
 import Context from "./Context/Context";
 import TodoAdd from "./Todo/AddTodo/TodoAdd";
@@ -38,11 +38,7 @@ const App = function () {
         )
     }
 
-    const [todos, setTodos] = React.useState([
-        {id: 1, completed: false, title: 'Купить хлеб', important: false},
-        {id: 2, completed: false, title: 'Купить масло', important: false},
-        {id: 3, completed: false, title: 'Купить молоко', important: false}
-    ])
+    const [todos, setTodos] = React.useState([])
 
     const filterTodos = function (id) {
         let data
@@ -100,9 +96,21 @@ const App = function () {
         setTodos(todos.concat([{
             title,
             id: Date.now(),
-            completed: false
+            completed: false,
+            date: Date.now()
         }]))
     }
+
+    useEffect(() => {
+        // eslint-disable-next-line no-undef
+        const raw = localStorage.getItem('todos') || []
+        setTodos(JSON.parse(raw))
+    }, [])
+
+    useEffect(() => {
+        // eslint-disable-next-line no-undef
+        localStorage.setItem('todos', JSON.stringify(todos))
+    }, [todos])
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values

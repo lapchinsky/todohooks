@@ -1,9 +1,11 @@
 import React, {useContext} from "react";
 import PropTypes from 'prop-types'
+import {formatDistanceToNow} from "date-fns";
 import Context from "../../Context/Context";
 
 import './TodoItem.css'
 import Timer from "../Timer/Timer";
+
 
 const TodoItem = function ({todo}) {
 
@@ -32,6 +34,10 @@ const TodoItem = function ({todo}) {
                 <button className="btn btn-outline-success btn-sm float-right" onClick={() => importantTodo(todo.id)}
                         type="button"><i className="fa fa-exclamation"/></button>
         </span>
+            <div style={{color: 'dimgray', fontSize: '12px'}}>Created {formatDistanceToNow(
+                todo.date,
+                {includeSeconds: true}
+            )} ago</div>
             <Timer />
         </li>
     )
