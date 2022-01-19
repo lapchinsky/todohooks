@@ -4,7 +4,6 @@ import {formatDistanceToNow} from "date-fns";
 import Context from "../../Context/Context";
 
 import './TodoItem.css'
-import Timer from "../Timer/Timer";
 
 
 const TodoItem = function ({todo}) {
@@ -38,7 +37,6 @@ const TodoItem = function ({todo}) {
                 todo.date,
                 {includeSeconds: true}
             )} ago</div>
-            <Timer />
         </li>
     )
 }
