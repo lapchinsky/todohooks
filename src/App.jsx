@@ -17,6 +17,7 @@ const App = function () {
     ])
 
     const [ids, setIds] = React.useState(1)
+    const [search, setSearch] = React.useState('')
 
     const inactiveButton = function () {
         setButtons(
@@ -43,13 +44,33 @@ const App = function () {
     const filterTodos = function (id) {
         let data
         if (id === 1) {
-            data = todos
+            if (search === '') {
+                data = todos
+            } else {
+                data = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
+            }
         } else if (id === 2) {
-            data = todos.filter(todo => !todo.completed)
+            if (search === '') {
+                data = todos.filter(todo => !todo.completed)
+            } else {
+                data = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
+                data = data.filter(todo => !todo.completed)
+            }
+        } else if (id === 3) {
+            if (search === '') {
+                data = todos.filter(todo => todo.completed)
+            } else {
+                data = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
+                data = data.filter(todo => todo.completed)
+            }
         } else {
-            data = todos.filter(todo => todo.completed)
+            data = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
         }
         return data
+    }
+
+    const searchTodos = function (value) {
+        return todos.filter(todo => todo.title.toLowerCase().includes(value.toLowerCase()))
     }
 
     const todosCount = function () {
@@ -112,13 +133,16 @@ const App = function () {
         localStorage.setItem('todos', JSON.stringify(todos))
     }, [todos])
 
+
+
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         <Context.Provider value={{ removeTodo, toggleTodo,
                                 importantTodo, addTodo,
                                 todosCount, doneCount,
                                 clearCompleted, buttons,
-                                toggleButton, setIds}}>
+                                toggleButton, setIds,
+                                searchTodos, setSearch}}>
             <div className='todo-app'>
                 <Header />
                 <div className="top-panel d-flex">
